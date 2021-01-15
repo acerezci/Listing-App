@@ -11,7 +11,9 @@ const Input: React.FC<Props> = (props) => {
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
-        defaultValue={props.value}
+        value={props.value}
+        onChange={props.onChange}
+        name={props.name}
       />
     </div>
   );
@@ -28,6 +30,8 @@ interface Props {
   labelClass: string;
   inputClass: string;
   value: string;
+  name: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default Input;

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ValidateProps, ValidateType } from "./../../utils/validate";
 
-const useForm = (validate: ValidateType) => {
+const useForm = (validate: ValidateType, callback: () => void) => {
   const [values, setValues] = useState<ValuesProps>({
     linkName: "",
   });
 
-  const [errors, setErrors] = useState<ValidateProps>({
-    linkName: "",
-  });
+  const [errors, setErrors] = useState<ValidateProps>({});
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.currentTarget;
 
     setValues({
@@ -23,7 +23,15 @@ const useForm = (validate: ValidateType) => {
     e.preventDefault();
 
     setErrors(validate(values));
+
+    setIsSubmitting(true);
   };
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      callback();
+    }
+  }, [errors]);
 
   return {
     handleChange,
@@ -34,7 +42,7 @@ const useForm = (validate: ValidateType) => {
 };
 
 export interface ValuesProps {
-  linkName: string;
+  [key: string]: string;
 }
 
 export default useForm;

@@ -1,10 +1,18 @@
 import React from "react";
 import Input from "../../components/Input";
 import useForm from "../../Hooks/useForm";
+import { saveLocalStorage, getLocalStorage } from "../../utils/localStorage";
 import validate from "../../utils/validate";
 
 const AddItemContainer: React.FC = () => {
-  const { handleChange, values, handleSubmit, errors } = useForm(validate);
+  const localStorageKey = "link";
+  const submit = () => {
+    const savedLocalStorageData = getLocalStorage(localStorageKey);
+    const toBeSavedLocalStorageData = [values, ...savedLocalStorageData];
+    saveLocalStorage(localStorageKey, toBeSavedLocalStorageData);
+  };
+
+  const { handleChange, values, handleSubmit, errors } = useForm(validate, submit);
 
   return (
     <div className="flex justify-center">
@@ -17,7 +25,9 @@ const AddItemContainer: React.FC = () => {
           placeholder="Please Enter The Link Name"
           type="text"
           id="link"
+          name="linkName"
           value={values.linkName}
+          onChange={handleChange}
         />
         {errors.linkName && (
           <p className="text-sm text-red-700 text-right mt-1">{errors.linkName}</p>
@@ -31,5 +41,9 @@ const AddItemContainer: React.FC = () => {
     </div>
   );
 };
+
+export interface ValuesProps {
+  linkName: string;
+}
 
 export default AddItemContainer;
