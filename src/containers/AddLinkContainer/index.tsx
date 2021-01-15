@@ -1,14 +1,20 @@
 import React from "react";
 import Input from "../../components/Input";
 import useForm from "../../Hooks/useForm";
+import getCurrentDate from "../../utils/date";
 import { saveLocalStorage, getLocalStorage } from "../../utils/localStorage";
 import validate from "../../utils/validate";
 
 const AddItemContainer: React.FC = () => {
   const localStorageKey = "link";
+
   const submit = () => {
     const savedLocalStorageData = getLocalStorage(localStorageKey);
-    const toBeSavedLocalStorageData = [values, ...savedLocalStorageData];
+    const savedLocalStorageDataLength = savedLocalStorageData.length;
+    const toBeSavedLocalStorageData = [
+      { ...values, id: savedLocalStorageDataLength, vote: 0, createdDate: getCurrentDate() },
+      ...savedLocalStorageData,
+    ];
     saveLocalStorage(localStorageKey, toBeSavedLocalStorageData);
   };
 
@@ -44,6 +50,9 @@ const AddItemContainer: React.FC = () => {
 
 export interface ValuesProps {
   linkName: string;
+  id: string;
+  vote: number;
+  createdDate: string;
 }
 
 export default AddItemContainer;

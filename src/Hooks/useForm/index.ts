@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ValidateProps, ValidateType } from "./../../utils/validate";
 
 const useForm = (validate: ValidateType, callback: () => void) => {
-  const [values, setValues] = useState<ValuesProps>({
+  const [values, setValues] = useState<FormValuesProps>({
     linkName: "",
   });
 
@@ -41,7 +41,7 @@ const useForm = (validate: ValidateType, callback: () => void) => {
   };
 };
 
-export interface ValuesProps {
+export interface FormValuesProps {
   [key: string]: string;
 }
 

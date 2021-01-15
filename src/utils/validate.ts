@@ -1,6 +1,6 @@
-import { ValuesProps } from "../Hooks/useForm";
+import { FormValuesProps } from "./../Hooks/useForm/index";
 
-const validate: ValidateType = (values: ValuesProps): ValidateProps => {
+const validate: ValidateType = (values: FormValuesProps): ValidateProps => {
   const errors: ValidateProps = {};
 
   if (!values.linkName.trim()) {
@@ -14,6 +14,6 @@ export interface ValidateProps {
   [key: string]: string;
 }
 
-export type ValidateType = (p: ValuesProps) => ValidateProps;
+export type ValidateType = (p: FormValuesProps) => ValidateProps;
 
 export default validate;

@@ -1,24 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Item from "../../components/Item";
-import { ValuesProps } from "../../Hooks/useForm";
 import { getLocalStorage } from "../../utils/localStorage";
+import { ValuesProps } from "../AddLinkContainer";
 
 const ListContainer: React.FC = () => {
   const localStorageKey = "link";
-  const [data, setData] = useState(getLocalStorage(localStorageKey));
-  const [style, setStyle] = useState("hidden");
-  const deleteRef = useRef(null);
-
-  const hoverOn = (e: React.MouseEvent) => {
-    // e.currentTarget.lastElementChild.att
-    setStyle("block");
-  };
+  const [data, setData] = useState<ValuesProps[]>(getLocalStorage(localStorageKey));
 
   return (
     <div className="flex flex-col justify-center items-center">
-      {data.map((item: ValuesProps, index: number) => (
-        <Item key={`${item.linkName}${index}`} linkName={item.linkName} />
-      ))}
+      {data.length > 0 ? (
+        data.map((item: ValuesProps) => (
+          <Item
+            setData={setData}
+            key={`${item.linkName}${item.id}`}
+            linkName={item.linkName}
+            id={item.id}
+            createdDate={item.createdDate}
+            vote={item.vote}
+          />
+        ))
+      ) : (
+        <div className="mt-4 text-2xl gray-900">Your Link List is Empty</div>
+      )}
     </div>
   );
 };
