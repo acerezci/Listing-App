@@ -17,4 +17,16 @@ const sortingByDate = (data: ValuesProps[]): ValuesProps[] => {
   return sortedData;
 };
 
-export { sortingByDate };
+const ascendingSortingByVote = (data: ValuesProps[]): ValuesProps[] => {
+  const sortedData = data.sort((a: ValuesProps, b: ValuesProps) => b.vote - a.vote);
+
+  return sortedData;
+};
+
+const descendingSortingByVote = (data: ValuesProps[]): ValuesProps[] => {
+  const sortedData = data.sort((a: ValuesProps, b: ValuesProps) => a.vote - b.vote);
+
+  return sortedData;
+};
+
+export { sortingByDate, ascendingSortingByVote, descendingSortingByVote };

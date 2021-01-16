@@ -2,18 +2,13 @@ import React, { useState } from "react";
 import { DeleteIcon, DissLikeIcon, LikeIcon } from "../../assets/Icons";
 import { ValuesProps } from "../../containers/AddLinkContainer";
 import showToastrMessage from "../../utils/showToastrMessage";
+import { ascendingSortingByVote, descendingSortingByVote } from "../../utils/sorting";
 import DeletePopup from "../DeletePopup";
 
-const Item: React.FC<Props> = ({
-  vote,
-  createdDate,
-  linkName,
-  setData,
-  item,
-  setVisibleToastrMessage,
-}) => {
+const Item: React.FC<Props> = ({ setData, item, setVisibleToastrMessage }) => {
   const [deleteStyle, setDeleteStyle] = useState<deleteStyleType>("hidden");
   const [visibleDeletePopup, setVisibleDeletePopup] = useState<boolean>(false);
+  const { createdDate, vote, linkName } = item;
 
   const onMouseEnter = () => {
     setDeleteStyle("block");
@@ -38,12 +33,12 @@ const Item: React.FC<Props> = ({
 
   const upVote = () => {
     item.vote += 1;
-    setData((prevState: ValuesProps[]) => [...prevState]);
+    setData((prevState: ValuesProps[]) => ascendingSortingByVote([...prevState]));
   };
 
   const downVote = () => {
     item.vote += -1;
-    setData((prevState: ValuesProps[]) => [...prevState]);
+    setData((prevState: ValuesProps[]) => descendingSortingByVote([...prevState]));
   };
 
   return (
@@ -83,10 +78,6 @@ const Item: React.FC<Props> = ({
 };
 
 interface Props {
-  linkName: string;
-  id: number;
-  vote: number;
-  createdDate: string;
   setData: (e: any) => void;
   setVisibleToastrMessage: (e: boolean) => void;
   item: ValuesProps;

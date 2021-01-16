@@ -4,21 +4,19 @@ import ListContainer from "./containers/ListContainer";
 import AddLinkContainer from "./containers/AddLinkContainer";
 import LayoutUI from "./containers/LayoutUI";
 
-const AppContainer: React.FC = () => {
-  return (
-    <Router>
-      <Switch>
-        <LayoutUI>
-          <Route exact path="/">
-            <ListContainer />
-          </Route>
-          <Route path="/addlink">
-            <AddLinkContainer />
-          </Route>
-        </LayoutUI>
-      </Switch>
-    </Router>
-  );
-};
+const AppContainer: React.FC = () => (
+  <Router>
+    <Switch>
+      <LayoutUI>
+        <Route exact path="/">
+          <ListContainer />
+        </Route>
+        <Route path="/addlink">
+          <AddLinkContainer />
+        </Route>
+      </LayoutUI>
+    </Switch>
+  </Router>
+);
 
 export default AppContainer;

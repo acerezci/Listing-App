@@ -27,19 +27,17 @@ const ToastrMessage: React.FC<Props> = ({
   text,
   visible = false,
   position = "rightBottom",
-}) => {
-  return (
-    <div
-      className={`${visible ? "opacity-100" : "opacity-0"} ${positionStyle[position]}
+}) => (
+  <div
+    className={`${visible ? "opacity-100" : "opacity-0"} ${positionStyle[position]}
       bg-${textColor[type]}-500 toastr-message`}
-    >
-      <div className={`text-${textColor[type]}-500 rounded-full bg-white mr-3`}>
-        {toastrIcon[type]}
-      </div>
-      <div className="text-white max-w-xs">{text}</div>
+  >
+    <div className={`text-${textColor[type]}-500 rounded-full bg-white mr-3`}>
+      {toastrIcon[type]}
     </div>
-  );
-};
+    <div className="text-white max-w-xs">{text}</div>
+  </div>
+);
 
 interface Props {
   type: ToastrType;
@@ -52,4 +50,4 @@ type ToastrType = "success" | "info" | "warning" | "danger";
 
 type PositionType = "rightTop" | "rightBottom" | "leftTop" | "leftBottom";
 
-export default ToastrMessage;
+export default React.memo(ToastrMessage);

@@ -11,24 +11,22 @@ const Input: React.FC<Props> = ({
   placeholder,
   value,
   onChange,
-}) => {
-  return (
-    <div className={containerClass}>
-      <label htmlFor={id} className={labelClass}>
-        {label}
-      </label>
-      <input
-        className={inputClass}
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        name={name}
-      />
-    </div>
-  );
-};
+}) => (
+  <div className={containerClass}>
+    <label htmlFor={id} className={labelClass}>
+      {label}
+    </label>
+    <input
+      className={inputClass}
+      id={id}
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      name={name}
+    />
+  </div>
+);
 
 type inputType = "text" | "number";
 
