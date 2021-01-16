@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+  .toastr-message {
+    @apply absolute transition-opacity duration-1000 ease-out flex items-center p-4 shadow-lg;
+  }
+
+  .item-container {
+    @apply transition duration-500 ease-in-out shadow-sm hover:shadow-xl w-5/12 flex justify-between items-center mt-4 py-1 border rounded-sm border-gray-400 h-28 px-3;
+  }
+
+  .error-text {
+    @apply text-sm text-red-700 text-right mt-1;
+  }
+}

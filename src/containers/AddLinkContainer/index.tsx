@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "../../components/Input";
+import ToastrMessage from "../../components/ToastrMessage";
 import useForm from "../../Hooks/useForm";
 import getCurrentDate from "../../utils/date";
+import { localStorageKey } from "../../utils/helpers";
 import { saveLocalStorage, getLocalStorage } from "../../utils/localStorage";
+import showToastrMessage from "../../utils/showToastrMessage";
 import validate from "../../utils/validate";
 
 const AddItemContainer: React.FC = () => {
-  const localStorageKey = "link";
+  const [visibleToastMessage, setVisibleToastrMessage] = useState<boolean>(false);
 
   const submit = () => {
     const savedLocalStorageData = getLocalStorage(localStorageKey);
@@ -16,9 +19,12 @@ const AddItemContainer: React.FC = () => {
       ...savedLocalStorageData,
     ];
     saveLocalStorage(localStorageKey, toBeSavedLocalStorageData);
+    showToastrMessage(setVisibleToastrMessage, 2000);
   };
 
   const { handleChange, values, handleSubmit, errors } = useForm(validate, submit);
+
+  useEffect(() => () => setVisibleToastrMessage(false), []);
 
   return (
     <div className="flex justify-center">
@@ -35,22 +41,26 @@ const AddItemContainer: React.FC = () => {
           value={values.linkName}
           onChange={handleChange}
         />
-        {errors.linkName && (
-          <p className="text-sm text-red-700 text-right mt-1">{errors.linkName}</p>
-        )}
+        {errors.linkName && <p className="error-text">{errors.linkName}</p>}
         <div className="flex justify-center mt-4">
           <button className="border rounded-sm border-gray-500 h-8 w-32" type="submit">
             Add
           </button>
         </div>
       </form>
+      <ToastrMessage
+        position="rightBottom"
+        visible={visibleToastMessage}
+        type="success"
+        text="The Link Was Added Successfully!"
+      />
     </div>
   );
 };
 
 export interface ValuesProps {
   linkName: string;
-  id: string;
+  id: number;
   vote: number;
   createdDate: string;
 }

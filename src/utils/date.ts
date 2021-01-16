@@ -1,8 +1,9 @@
+import { dateFormatType } from "./helpers";
 import moment from "moment";
 
 const getCurrentDate = () => {
   const currentDate = new Date();
-  const formatedDate = moment(currentDate).format("DD/MM/YYYY HH:mm:ss");
+  const formatedDate = moment(currentDate).format(dateFormatType);
 
   return formatedDate;
 };

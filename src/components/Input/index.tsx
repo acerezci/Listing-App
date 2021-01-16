@@ -1,19 +1,30 @@
 import React from "react";
 
-const Input: React.FC<Props> = (props) => {
+const Input: React.FC<Props> = ({
+  label,
+  id,
+  type,
+  containerClass,
+  inputClass,
+  labelClass,
+  name,
+  placeholder,
+  value,
+  onChange,
+}) => {
   return (
-    <div className={props.containerClass}>
-      <label htmlFor={props.id} className={props.labelClass}>
-        {props.label}
+    <div className={containerClass}>
+      <label htmlFor={id} className={labelClass}>
+        {label}
       </label>
       <input
-        className={props.inputClass}
-        id={props.id}
-        type={props.type}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChange={props.onChange}
-        name={props.name}
+        className={inputClass}
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        name={name}
       />
     </div>
   );

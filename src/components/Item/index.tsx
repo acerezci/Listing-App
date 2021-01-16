@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { DeleteIcon, DissLikeIcon, LikeIcon } from "../../assets/Icons";
 import { ValuesProps } from "../../containers/AddLinkContainer";
-import {
-  deleteItemLocalStorage,
-  getLocalStorage,
-  changeVoteItemLocalStorage,
-} from "../../utils/localStorage";
+import showToastrMessage from "../../utils/showToastrMessage";
+import DeletePopup from "../DeletePopup";
 
-const Item: React.FC<Props> = (props) => {
-  const localStorageKey = "link";
-  const increaseAmount = 1;
-  const decreaseAmount = -1;
+const Item: React.FC<Props> = ({
+  vote,
+  createdDate,
+  linkName,
+  setData,
+  item,
+  setVisibleToastrMessage,
+}) => {
   const [deleteStyle, setDeleteStyle] = useState<deleteStyleType>("hidden");
+  const [visibleDeletePopup, setVisibleDeletePopup] = useState<boolean>(false);
 
   const onMouseEnter = () => {
     setDeleteStyle("block");
@@ -21,33 +23,40 @@ const Item: React.FC<Props> = (props) => {
     setDeleteStyle("hidden");
   };
 
+  const showDeletePopup = () => {
+    setVisibleDeletePopup(true);
+  };
+
   const deleteItem = () => {
-    deleteItemLocalStorage(localStorageKey, props.id);
-    props.setData(getLocalStorage(localStorageKey));
+    showToastrMessage(setVisibleToastrMessage, 1000);
+    setData((prevState: ValuesProps[]) => {
+      const deletedPrevState = prevState.filter((el) => el !== item);
+
+      return deletedPrevState;
+    });
   };
 
   const upVote = () => {
-    changeVoteItemLocalStorage(localStorageKey, props.id, increaseAmount);
-    props.setData(getLocalStorage(localStorageKey));
+    item.vote += 1;
+    setData((prevState: ValuesProps[]) => [...prevState]);
   };
 
   const downVote = () => {
-    changeVoteItemLocalStorage(localStorageKey, props.id, decreaseAmount);
-    props.setData(getLocalStorage(localStorageKey));
+    item.vote += -1;
+    setData((prevState: ValuesProps[]) => [...prevState]);
   };
 
   return (
-    <div
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      className="transition duration-500 ease-in-out shadow-sm hover:shadow-xl w-6/12 flex justify-between items-center mt-4 py-1 border rounded-sm border-gray-400 h-28 px-3"
-    >
-      <div className="flex flex-col h-full justify-between">
-        <div className="text-lg font-semibold">{props.linkName}</div>
-        <div className="flex text-sm font-medium">
-          <div>Vote : {props.vote}</div>
-          <div className="flex flex-col ml-3">
-            <div onClick={upVote} className="flex justify-between items-center cursor-pointer">
+    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="item-container">
+      <div className="flex h-full">
+        <div className="flex flex-col justify-between">
+          <div className="text-lg font-semibold">{linkName}</div>
+          <div className="text-xs font-light">Created Date : {createdDate}</div>
+        </div>
+        <div className="flex flex-col justify-center items-center text-sm font-medium">
+          <div className="text-xl">Vote : {vote}</div>
+          <div className="flex">
+            <div onClick={upVote} className="flex justify-between items-center cursor-pointer mr-3">
               <span className="mr-1.5">Up Vote</span>
               <LikeIcon width={14} />
             </div>
@@ -57,21 +66,30 @@ const Item: React.FC<Props> = (props) => {
             </div>
           </div>
         </div>
-        <div className="text-xs font-light">Created Date : {props.createdDate}</div>
       </div>
-      <div className={`${deleteStyle} cursor-pointer h-full `} onClick={deleteItem}>
+      <div className={`${deleteStyle} cursor-pointer h-full`} onClick={showDeletePopup}>
         <DeleteIcon />
       </div>
+      {visibleDeletePopup && (
+        <DeletePopup
+          deleteItem={deleteItem}
+          setVisible={setVisibleDeletePopup}
+          text="Are You Sure Want Delete The Item?"
+          title="Delete Item"
+        />
+      )}
     </div>
   );
 };
 
 interface Props {
   linkName: string;
-  id: string;
+  id: number;
   vote: number;
   createdDate: string;
-  setData: (e: ValuesProps[]) => void;
+  setData: (e: any) => void;
+  setVisibleToastrMessage: (e: boolean) => void;
+  item: ValuesProps;
 }
 
 type deleteStyleType = "hidden" | "block";
