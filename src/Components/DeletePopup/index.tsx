@@ -24,11 +24,17 @@ const DeletePopup: React.FC<Props> = ({ title, text, setVisible, deleteItem }) =
                 <DeleteWarningIcon width={24} />
               </div>
               <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                <h3
+                  data-testid="deletepopup-title"
+                  className="text-lg leading-6 font-medium text-gray-900"
+                  id="modal-headline"
+                >
                   {title}
                 </h3>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">{text}</p>
+                  <p data-testid="deletepopup-text" className="text-sm text-gray-500">
+                    {text}
+                  </p>
                 </div>
               </div>
             </div>
@@ -38,6 +44,7 @@ const DeletePopup: React.FC<Props> = ({ title, text, setVisible, deleteItem }) =
               type="button"
               className="rounded-md border shadow-sm px-4 py-2 bg-red-600 font-medium text-white focus:outline-none ml-3"
               onClick={deleteItem}
+              data-testid="deletepopup-delete"
             >
               Delete
             </button>
@@ -45,6 +52,7 @@ const DeletePopup: React.FC<Props> = ({ title, text, setVisible, deleteItem }) =
               onClick={cancel}
               type="button"
               className="focus:outline-none border py-2 px-4 rounded-md shadow-sm"
+              data-testid="deletepopup-cancel"
             >
               Cancel
             </button>

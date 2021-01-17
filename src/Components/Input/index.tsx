@@ -17,6 +17,7 @@ const Input: React.FC<Props> = ({
       {label}
     </label>
     <input
+      data-testid="input"
       className={inputClass}
       id={id}
       type={type}

@@ -42,14 +42,25 @@ const Item: React.FC<Props> = ({ setData, item, setVisibleToastrMessage }) => {
   };
 
   return (
-    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="item-container">
+    <div
+      data-testid="item-container"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className="item-container"
+    >
       <div className="flex h-full">
         <div className="flex flex-col justify-between">
-          <div className="text-lg font-semibold">{linkName}</div>
-          <div className="text-xs font-light">Created Date : {createdDate}</div>
+          <div data-testid="item-link-name" className="text-lg font-semibold">
+            {linkName}
+          </div>
+          <div data-testid="item-created-date" className="text-xs font-light">
+            Created Date : {createdDate}
+          </div>
         </div>
         <div className="flex flex-col justify-center items-center text-sm font-medium">
-          <div className="text-xl">Vote : {vote}</div>
+          <div data-testid="item-vote" className="text-xl">
+            Vote : {vote}
+          </div>
           <div className="flex">
             <div onClick={upVote} className="flex justify-between items-center cursor-pointer mr-3">
               <span className="mr-1.5">Up Vote</span>
@@ -62,7 +73,11 @@ const Item: React.FC<Props> = ({ setData, item, setVisibleToastrMessage }) => {
           </div>
         </div>
       </div>
-      <div className={`${deleteStyle} cursor-pointer h-full`} onClick={showDeletePopup}>
+      <div
+        data-testid="item-deleteicon"
+        className={`${deleteStyle} cursor-pointer h-full`}
+        onClick={showDeletePopup}
+      >
         <DeleteIcon />
       </div>
       {visibleDeletePopup && (
