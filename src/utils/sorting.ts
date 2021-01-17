@@ -1,4 +1,4 @@
-import { ValuesProps } from "./../containers/AddLinkContainer/index";
+import { ValuesProps } from "../Containers/AddLinkContainer/index";
 import { dateFormatType } from "./helpers";
 import moment from "moment";
 

@@ -1,4 +1,4 @@
-import { ValuesProps } from "./../containers/AddLinkContainer/index";
+import { ValuesProps } from "../Containers/AddLinkContainer/index";
 
 const getLocalStorage = (key: string) => {
   const savedValue = JSON.parse(localStorage.getItem(key) || "[]");

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import Input from "../../components/Input";
-import ToastrMessage from "../../components/ToastrMessage";
+import Input from "../../Components/Input";
+import ToastrMessage from "../../Components/ToastrMessage";
 import useForm from "../../Hooks/useForm";
 import getCurrentDate from "../../utils/date";
 import { localStorageKey } from "../../utils/helpers";

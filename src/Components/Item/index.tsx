@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DeleteIcon, DissLikeIcon, LikeIcon } from "../../assets/Icons";
-import { ValuesProps } from "../../containers/AddLinkContainer";
+import { ValuesProps } from "../../Containers/AddLinkContainer";
 import showToastrMessage from "../../utils/showToastrMessage";
 import { ascendingSortingByVote, descendingSortingByVote } from "../../utils/sorting";
 import DeletePopup from "../DeletePopup";

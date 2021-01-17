@@ -1,6 +1,6 @@
 import React from "react";
 import { AscendingIcon, DescendingIcon } from "../../assets/Icons";
-import { ValuesProps } from "../../containers/AddLinkContainer";
+import { ValuesProps } from "../../Containers/AddLinkContainer";
 import { ascendingSortingByVote, descendingSortingByVote } from "../../utils/sorting";
 
 const Sorting: React.FC<Props> = ({ data, setData }) => {

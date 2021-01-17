@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Item from "../../components/Item";
-import Pagination from "../../components/Pagination";
-import Sorting from "../../components/Sorting";
-import ToastrMessage from "../../components/ToastrMessage";
+import Item from "../../Components/Item";
+import Pagination from "../../Components/Pagination";
+import Sorting from "../../Components/Sorting";
+import ToastrMessage from "../../Components/ToastrMessage";
 import { localStorageKey } from "../../utils/helpers";
 import { getLocalStorage, saveLocalStorage } from "../../utils/localStorage";
 import { sortingByDate } from "../../utils/sorting";
@@ -21,7 +21,6 @@ const ListContainer: React.FC = () => {
 
   useEffect(() => {
     saveLocalStorage(localStorageKey, data);
-    // setCurrentPage(1);
   }, [data]);
 
   useEffect(() => () => setVisibleToastrMessage(false), []);

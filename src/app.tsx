@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import ListContainer from "./containers/ListContainer";
-import AddLinkContainer from "./containers/AddLinkContainer";
-import LayoutUI from "./containers/LayoutUI";
+import ListContainer from "./Containers/ListContainer";
+import AddLinkContainer from "./Containers/AddLinkContainer";
+import LayoutUI from "./Containers/LayoutUI";
 
 const AppContainer: React.FC = () => (
   <Router>
